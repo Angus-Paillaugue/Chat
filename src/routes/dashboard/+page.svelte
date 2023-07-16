@@ -1,5 +1,6 @@
 <script>
     import { Modal } from 'flowbite-svelte'
+    import { pageMetaData } from "$lib/stores"
 
     export let data;
 
@@ -35,6 +36,10 @@
             }
         }catch(_){}
     }
+
+    $pageMetaData.title = "Dashboard",
+    $pageMetaData.description = "";
+    $pageMetaData.headerText = "Dashboard";
 </script>
 
 <div class="flex flex-col-reverse sm:flex-row justify-start items-start">

@@ -36,3 +36,12 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+
+# TODO:
+
+ - [-] Be able to mention users in messages
+ - [-] Be able to include images in messages
+ - [-] Be able to react to messages
+ - [-] Be able to delete own messages
+ - [-] Put $pageMetaData in all the website pages

@@ -1,7 +1,12 @@
 <script>
     import { enhance } from '$app/forms';
+    import { pageMetaData } from "$lib/stores"
   
     export let form;
+
+    $pageMetaData.title = "Log-in",
+    $pageMetaData.description = "";
+    $pageMetaData.headerText = "Log-in";
 </script>
 
 <div class="max-w-md mx-auto w-full h-screen flex flex-col justify-center">

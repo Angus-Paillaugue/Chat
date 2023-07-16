@@ -3,7 +3,7 @@
 
     $pageMetaData.title = "Home",
     $pageMetaData.description = "";
-    $pageMetaData.headerText = "Home"
+    $pageMetaData.headerText = "Home";
 </script>
 
 <section id="hero-area" class="bg-primary-100 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
