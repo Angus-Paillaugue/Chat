@@ -4,7 +4,6 @@
     export let data;
 
     const { numberOfUsers } = data;
-    console.log(numberOfUsers);
 
     $pageMetaData.title = "Home",
     $pageMetaData.description = "";
@@ -28,39 +27,21 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 px-6 gap-2">
         
         <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-gear-fill text-5xl text-primary-500" />
-            <h3>Web Development</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+            <i class="bi bi-lock-fill text-5xl text-primary-500" />
+            <h3>Security</h3>
+            <p>At our core, we prioritize your security. We employ state-of-the-art encryption protocols and robust security measures to ensure your data remains safe and protected, allowing you to chat with confidence.</p>
         </div>
 
         <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-bar-chart-fill text-5xl text-primary-500" />
-            <h3>Graphic Design</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+            <i class="bi bi-bell-slash-fill text-5xl text-primary-500" />
+            <h3>Privacy</h3>
+            <p>Your privacy matters to us. We are committed to maintaining strict confidentiality and never sharing your personal information with third parties. Rest assured that your conversations and content are kept private, giving you complete control over your digital footprint.</p>
         </div>
 
         <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-briefcase-fill text-5xl text-primary-500" />
-            <h3>Business Branding</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
-        </div>
-
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-pencil-fill text-5xl text-primary-500" />
-            <h3>Content Writing</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
-        </div>
-
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-phone-fill text-5xl text-primary-500" />
-            <h3>App Development</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
-        </div>
-
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
-            <i class="bi bi-stack text-5xl text-primary-500" />
-            <h3>Digital Marketing</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+            <i class="bi bi-cash-coin text-5xl text-primary-500" />
+            <h3>Pricing</h3>
+            <p>To use our app, you d'ont have to spend a dime! Our app doesn't include <b>any</b> kind of purchases !</p>
         </div>
     </div>
 </section>
@@ -72,29 +53,29 @@
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-stack text-4xl" />
                 <h4>Built with TailwindCSS</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint.</p>
+                <p>This website has been built with state of the art tools like <a href="https://kit.svelte.dev/" class="link">SvelteKit</a>, <a href="https://tailwindcss.com/" class="link">TailwindCSS</a> ad even <a href="https://pocketbase.io/" class="link">PocketBase</a></p>
             </div>
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-gift-fill text-4xl" />
                 <h4>Free to Use</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint.</p>
+                <p>Being free across the whole app was important to us to insure equality between all users.</p>
             </div>
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-laptop-fill text-4xl" />
                 <h4>Fully Responsive</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint.</p>
+                <p>This website can adapt to any screen size you have (computer, smartphone, tablet, smart-fridge, ...)</p>
             </div>
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-card-text text-4xl" />
-                <h4>Easy to Customize</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint.</p>
+                <h4>Easy to Use</h4>
+                <p>This website has been built to be as simple as possible. No extra feature, just what you need and want.</p>
             </div>
         </div>
         <img src="rocket.svg" alt="" />
     </div>
 </section>
 
-<section id="pricing" class="py-24 min-h-screen">
+<!-- <section id="pricing" class="py-24 min-h-screen">
     <h2 class="mb-24 w-fit mx-auto">Pricing</h2>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 items-center">
         <div class="w-full h-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
@@ -187,4 +168,4 @@
             <a href="#pricing" class="button-primary">Get It</a>
         </div>
     </div>
-</section>
+</section> -->
