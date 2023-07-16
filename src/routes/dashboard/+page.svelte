@@ -55,9 +55,7 @@
         <div class="flex flex-col gap-4 h-full overflow-auto" bind:this={conversationsUsers}>
             {#each messages as message (message.id)}
                 <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-50 rounded-xl transition-all" data-username="{message.user.username}">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary-500 flex-shrink-0">
-                        { message.user.username.split("")[0].toUpperCase() ?? "X" }
-                    </div>
+                    <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.user.id}/{message.user.avatar}?thumb=100x100" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                     <div class="flex flex-col">
                         <h6>{ message.user.username }</h6>
                         <p class="line-clamp-1 text-ellipsis">{message.text}</p>
@@ -67,7 +65,8 @@
         </div>
     </aside>
 
-    <div class="p-4 grid grid-cols-1 lg:grid-cols-2 w-max">
+    <div class="p-4 grid grid-cols-1 gap-4 lg:grid-cols-2 w-max">
+        <a href="/dashboard/settings" class="card-button" ><i class="bi bi-sliders"></i><span>Settings<p>Change some informations</p></span></a>
         <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
     </div>
 </div>
@@ -105,9 +104,9 @@
     <div class="text-start">
         <h4 class="mb-2">Sign out?</h4>
         <p>Are you sure you want to sign out of this account ?</p>
-        <form method="POST" class="flex flex-row gap-2 mt-4" action="?/signOut">
+        <div class="flex flex-row gap-2 mt-4">
             <button class="button-border-gray w-full" type="button" on:click={() => {logOutModal = false;}}>No, cancel</button>
-            <button class="button-red w-full" type="submit">Yes, sign-out</button>
-        </form>
+            <a href="/sign-out" class="button-red w-full">Yes, sign-out</a>
+        </div>
     </div>
 </Modal>

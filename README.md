@@ -40,7 +40,8 @@ You can preview the production build with `npm run preview`.
 
 # TODO:
 
- - [-] Be able to mention users in messages
+ - [-] Fix "Sign-out" button on Dashboard
+ - [x] Be able to mention users in messages
  - [-] Be able to include images in messages
  - [-] Be able to react to messages
  - [-] Be able to delete own messages

@@ -1,6 +1,11 @@
 <script>
     import { pageMetaData } from "$lib/stores"
 
+    export let data;
+
+    const { numberOfUsers } = data;
+    console.log(numberOfUsers);
+
     $pageMetaData.title = "Home",
     $pageMetaData.description = "";
     $pageMetaData.headerText = "Home";

@@ -4,11 +4,18 @@ export async function POST({ locals, request }) {
     const { newMessage, channel } = formData;
     const { user, pb } = locals;
 
-        const data = {
-            text: newMessage,
-            from: user.id,
-            to:channel
-        };
-        await pb.collection('messages').create(data);
+    const parseMentions = (text) => {
+        const regexExp = new RegExp(/\B@\w+/g)
+        return text.replace(regexExp, function(match) {
+            return `<user>${match}</user> `;
+        });
+    }
+
+    const data = {
+        text: parseMentions(newMessage),
+        from: user.id,
+        to:channel
+    };
+    await pb.collection('messages').create(data);
     return new Response(JSON.stringify({ success:true }));
 };
