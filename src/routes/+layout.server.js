@@ -1,5 +1,5 @@
 export const load = ({ locals }) => {
-    const {user } = locals;
+    const { user } = locals;
 
 	return { user };
 };

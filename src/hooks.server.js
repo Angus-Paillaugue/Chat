@@ -1,22 +1,26 @@
-import PocketBase from 'pocketbase';
+import { redirect } from '@sveltejs/kit';
+import { pb } from '$lib/poketbase';
 
 export const handle = async ({ event, resolve }) => {
-    const { locals, request } = event;
-	locals.pb = new PocketBase("http://127.0.0.1:8090");
-	console.log(request.headers.get('token'));
-	locals.pb.authStore.loadFromCookie(request.headers.get('token') || '');
+    const { locals, request, url } = event;
+	locals.pb = pb;
+	pb.authStore.loadFromCookie(request.headers.get('cookie') || '');
 
 	try {
-		if (locals.pb.authStore.isValid) {
-			await locals.pb.collection('users').authRefresh();
-			locals.user = structuredClone(locals.pb.authStore.model);
+		if (pb.authStore.isValid) {
+			await pb.collection('users').authRefresh();
+			locals.user = structuredClone(pb.authStore.model);
 		}
 	} catch (_) {
-		locals.pb.authStore.clear();
+		pb.authStore.clear();
 		locals.user = undefined;
+	}
+	
+	if(!locals.user && url.pathname.startsWith("/dashboard")){
+		throw redirect(303, "/");
 	}
 
 	const response = await resolve(event);
-	response.headers.set('set-cookie', locals.pb.authStore.exportToCookie({ secure: true }));
+	response.headers.set('set-cookie', pb.authStore.exportToCookie({ secure: true }));
 	return response;
 };

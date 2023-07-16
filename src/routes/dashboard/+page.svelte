@@ -1,12 +1,9 @@
 <script>
-    import { onMount } from 'svelte'
     import { Modal } from 'flowbite-svelte'
 
     export let data;
 
-    console.log(data);
-    let messages = [];
-    let users = []
+    const { messages, users } = data
     let newChatModal = false;
     let logOutModal = false;
     let newChatUserSuggest;
@@ -41,7 +38,7 @@
 </script>
 
 <div class="flex flex-col-reverse sm:flex-row justify-start items-start">
-    <aside class="flex flex-col gap-4 md:w-60 lg:w-80 p-2 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:h-screen w-full">
+    <aside class="flex flex-col gap-4 md:w-60 lg:w-80 p-2 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 h-screen w-full">
         <button class="button-primary" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
         <hr class="my-2">
         <div class="relative w-full text-gray-500 dark:text-gray-400">
@@ -52,7 +49,7 @@
         </div>
         <div class="flex flex-col gap-4 h-full overflow-auto" bind:this={conversationsUsers}>
             {#each messages as message (message.id)}
-                <a href="/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-50 rounded-xl transition-all" data-username="{message.user.username}">
+                <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-50 rounded-xl transition-all" data-username="{message.user.username}">
                     <div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary-500 flex-shrink-0">
                         { message.user.username.split("")[0].toUpperCase() ?? "X" }
                     </div>
@@ -85,7 +82,7 @@
         </div>
         <div class=" w-full bg-gray-100 mb-4 rounded-lg overflow-hidden" bind:this={newChatUserSuggest}>
             {#each users as user (user.id)}
-                <a href="/messages/{user.id}" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-200 transition-all" data-username="{user.username}">
+                <a href="/dashboard/messages/{user.id}" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-200 transition-all" data-username="{user.username}">
                     <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-500 flex-shrink-0">
                         { user.username.split("")[0].toUpperCase() ?? "X" }
                     </div>
@@ -103,9 +100,9 @@
     <div class="text-start">
         <h4 class="mb-2">Sign out?</h4>
         <p>Are you sure you want to sign out of this account ?</p>
-        <div class="flex flex-row gap-2 mt-4">
-            <button class="button-border-gray w-full" on:click={() => {logOutModal = false;}}>No, cancel</button>
-            <button class="button-red w-full" formaction="?/signOut">Yes, sign-out</button>
-        </div>
+        <form method="POST" class="flex flex-row gap-2 mt-4" action="?/signOut">
+            <button class="button-border-gray w-full" type="button" on:click={() => {logOutModal = false;}}>No, cancel</button>
+            <button class="button-red w-full" type="submit">Yes, sign-out</button>
+        </form>
     </div>
 </Modal>
