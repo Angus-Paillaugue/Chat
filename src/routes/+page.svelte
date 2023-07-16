@@ -6,7 +6,7 @@
     const { numberOfUsers } = data;
 
     $pageMetaData.title = "Home",
-    $pageMetaData.description = "";
+    $pageMetaData.description = "Welcome to ChitChat";
     $pageMetaData.headerText = "Home";
 </script>
 
@@ -42,6 +42,12 @@
             <i class="bi bi-cash-coin text-5xl text-primary-500" />
             <h3>Pricing</h3>
             <p>To use our app, you d'ont have to spend a dime! Our app doesn't include <b>any</b> kind of purchases !</p>
+        </div>
+
+        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
+            <i class="bi bi-cash-coin text-5xl text-primary-500" />
+            <h3>Community</h3>
+            <p>At this moment, <b>{numberOfUsers}</b> {numberOfUsers > 1 ? "users" : "user"} have joined the app. Now is your turn. <a href="/signin" class="link">Sign-up here</a></p>
         </div>
     </div>
 </section>

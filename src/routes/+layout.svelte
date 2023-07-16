@@ -1,11 +1,18 @@
 <script>
     import "../app.css";
+    import { page } from '$app/stores';
+    import { onMount } from 'svelte';
     import { pageMetaData } from "$lib/stores"
     import Navbar from "$lib/components/Navbar.svelte";
 
     export let data;
-
+    
     const { user } = data;
+    let backButton = false;
+
+    onMount(() => {
+        if((history && history?.length) > 1) backButton = true;
+    });
 </script>
 
 <svelte:head>
@@ -13,13 +20,21 @@
     <meta name="description" content="{$pageMetaData.description}">
 </svelte:head>
 
-<Navbar user={user}/>
 
-<main class="md:ml-64 relative">
-    {#if $pageMetaData?.headerText}
-        <nav class="p-4 bg-white bg-opacity-50 sticky w-full left-0 top-0 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 z-30 backdrop-blur">
-            <h4>{$pageMetaData.headerText}</h4>
-        </nav>
-    {/if}
+<main class="relative min-h-screen">
+    <nav class="p-4 bg-white bg-opacity-50 sticky w-full left-0 top-0 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 z-30 backdrop-blur flex flex-row gap-6 justify-between items-center h-20">
+        <div class="flex flex-row gap-6 justify-start items-center">
+            {#if backButton}
+                <button on:click={() => {history.back()}} class="button-border-gray" name="back">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/></svg>
+                </button>
+            {/if}
+            <h4>{@html $pageMetaData.headerText}</h4>
+        </div>
+        {#if $page.url.pathname == "/"}
+            <img src="/logo.svg" alt="Logo" class="h-2/3">
+        {/if}
+    </nav>
     <slot />
+    <Navbar user={user}/>
 </main>

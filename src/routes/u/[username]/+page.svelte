@@ -1,9 +1,15 @@
 <script>
+    import { pageMetaData } from "$lib/stores"
+
     export let data;
 
     let fullBio;
 
     const { watchingUser } = data;
+
+    $pageMetaData.title = `${watchingUser.username}'s profile`,
+    $pageMetaData.description = "";
+    $pageMetaData.headerText = `${watchingUser.username}'s profile`;
 </script>
 
 <div class="w-full relative bg-no-repeat bg-center bg-cover max-h-64 lg:max-h-80" style="height: 25vw; background-image: url('http://127.0.0.1:8090/api/files/_pb_users_auth_/{watchingUser.id}/{watchingUser.banner}');">

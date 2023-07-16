@@ -43,8 +43,8 @@
 </script>
 
 <div class="flex flex-col-reverse sm:flex-row justify-start items-start">
-    <aside class="flex flex-col gap-4 md:w-60 lg:w-80 p-2 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 h-screen w-full">
-        <button class="button-primary" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
+    <aside class="flex flex-col gap-4 md:w-[500px] p-4 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:h-screen w-full">
+        <button class="button-primary button-lg" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
         <hr class="my-2">
         <div class="relative w-full text-gray-500 dark:text-gray-400">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -65,7 +65,8 @@
         </div>
     </aside>
 
-    <div class="p-4 grid grid-cols-1 gap-4 lg:grid-cols-2 w-max">
+    <!-- Action cards -->
+    <div class="p-4 grid grid-cols-1 gap-4 md:grid-cols-2 w-full max-w-screen-md">
         <a href="/dashboard/settings" class="card-button" ><i class="bi bi-sliders"></i><span>Settings<p>Change some informations</p></span></a>
         <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
     </div>

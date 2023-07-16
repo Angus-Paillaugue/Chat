@@ -57,7 +57,7 @@
 
     $pageMetaData.title = `Chatting with ${chattingWith.username}`,
     $pageMetaData.description = "";
-    $pageMetaData.headerText = null;
+    $pageMetaData.headerText = `<a href="/u/${chattingWith.username}" class="p-2 flex flex-row justify-start items-center gap-4 w-fit"><img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/${chattingWith.id}/${chattingWith.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/><div class="flex flex-col"><h6>${ chattingWith.username }</h6></div></a>`;
 
     function oninput(){
         textarea.style.height = calcHeight(textarea.value) + "px";
@@ -106,14 +106,8 @@
 </script>
 
   
-<header class="w-full p-4 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sticky top-0 z-30 backdrop-blur bg-white bg-opacity-50">
-    <a href="/u/{chattingWith.username}" class="p-2 flex flex-row justify-start items-center gap-4 w-fit">
-        <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{chattingWith.id}/{chattingWith.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
-        <div class="flex flex-col"><h6>{ chattingWith.username }</h6></div>
-    </a>
-</header>
-<div class="h-screen max-w-screen-lg mx-auto w-full">
-    <div class="flex flex-col h-full justify-between max-w-screen-lg w-full">
+<div class="h-screen mx-auto w-full">
+    <div class="flex flex-col h-full justify-between w-full">
         <div>
             <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto">
                 {#each messages as message (message.id)}
@@ -129,7 +123,7 @@
             </div>
         </div>
           
-        <form on:submit|preventDefault={sendMessage} class="max-w-screen-lg w-full sticky bottom-0 bg-gray-50 dark:bg-gray-700 shadow z-20">
+        <form on:submit|preventDefault={sendMessage} class="w-full sticky bottom-0 bg-gray-50 dark:bg-gray-700 shadow z-20">
             {#if atMenuDisplay}
                 <div class="w-full p-4">
                     <div class="flex flex-row flex-wrap gap-4" bind:this={mentionUserContainer}>

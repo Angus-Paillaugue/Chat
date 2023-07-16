@@ -1,5 +1,6 @@
 <script>
     import { Tabs, TabItem, Tooltip, Modal  } from 'flowbite-svelte';
+    import { pageMetaData } from "$lib/stores"
     import { enhance } from '$app/forms'
 
     export let data;
@@ -9,6 +10,11 @@
 
     const { user } = data;
     let deleteAccountModal = false;
+
+
+    $pageMetaData.title = `Settings`,
+    $pageMetaData.description = "";
+    $pageMetaData.headerText = `Settings`;
 </script>
 
 <div class="max-w-md mx-auto w-full mt-10">
