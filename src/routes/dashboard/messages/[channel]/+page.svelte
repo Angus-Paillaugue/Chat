@@ -44,14 +44,6 @@
             textarea.style.height = "42px";
         }
     }
-
-    const scrollToBottom = node => {
-        const scroll = () => node.scroll({
-            top: node.scrollHeight,
-			behavior: 'smooth',
-		});
-		return { update: scroll }
-	};
 </script>
   
 <header class="w-full p-4 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sticky top-0 z-30 backdrop-blur bg-white bg-opacity-50">
@@ -63,7 +55,7 @@
 <div class="h-screen max-w-screen-lg mx-auto w-full">
     <div class="flex flex-col h-full justify-between max-w-screen-lg w-full">
         <div>
-            <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto" use:scrollToBottom={messages}>
+            <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto">
                 {#each messages as message (message.id)}
                     <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
                         <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
