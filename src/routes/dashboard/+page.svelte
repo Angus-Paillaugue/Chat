@@ -1,48 +1,16 @@
 <script>
-    import { onMount } from 'svelte';
-    import { goto } from '$app/navigation'
+    import { onMount } from 'svelte'
     import { Modal } from 'flowbite-svelte'
-    import { currentUser, pb } from '$lib/pocketbase'
 
+    export let data;
+
+    console.log(data);
     let messages = [];
     let users = []
     let newChatModal = false;
     let logOutModal = false;
     let newChatUserSuggest;
     let conversationsUsers;
-
-    if(!$currentUser) goto("/login")
-  
-    onMount(async () => {
-        // Get initial messages
-        const resultList = await pb.collection('messages').getList(1, 50, {
-            sort: '-created',
-            filter:`to="${$currentUser.id}" || from="${$currentUser.id}"`,
-            expand: 'to,from',
-        });
-        let ids = []
-        messages = resultList.items;
-        messages = messages.map(message => {
-            return { text:message.text, id:message.id, user:message.expand.from.id == $currentUser.id ? message.expand.to : message.expand.from }
-        });
-        messages = messages.filter(message => {
-            if(ids.includes(message.user.id)){
-                return false;
-            }else{
-                ids.push(message.user.id);
-                return true;
-            }
-        });
-
-        users = await pb.collection("users").getFullList();
-        users = users.filter(user => user.id !== $currentUser.id);
-        searchUser("");
-    });
-
-    function signOut() {
-        pb.authStore.clear();
-        goto("/login")
-    }
 
     function searchUser(value){
         try {
@@ -137,7 +105,7 @@
         <p>Are you sure you want to sign out of this account ?</p>
         <div class="flex flex-row gap-2 mt-4">
             <button class="button-border-gray w-full" on:click={() => {logOutModal = false;}}>No, cancel</button>
-            <button class="button-red w-full" on:click={signOut}>Yes, sign-out</button>
+            <button class="button-red w-full" formaction="?/signOut">Yes, sign-out</button>
         </div>
     </div>
 </Modal>

@@ -1,6 +1,5 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { goto } from '$app/navigation';
     import { page } from "$app/stores"
     import { currentUser, pb } from '$lib/pocketbase';
     import { error } from '@sveltejs/kit';
@@ -13,7 +12,6 @@
 
     const { channel } = $page.params;
 
-    if(channel == $currentUser?.id) goto("/dashboard")
     if(!$currentUser) {
         throw error(402, { status:402, message:"You need to be logged-in to access this page", buttonText:"Log-in", link:"/login" })
     }
@@ -80,7 +78,7 @@
         </header>
         <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto" use:scrollToBottom={messages}>
             {#each messages as message (message.id)}
-                <div class="{$currentUser.id == message.expand?.from?.id ? "col-start-6 col-end-13" : "col-start-1 col-end-8"} p-3 rounded-lg">
+                <div class="{$currentUser.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
                     <div class="flex {$currentUser.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
                         <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary-500 flex-shrink-0">
                             {message.expand?.from?.username.split("")[0].toUpperCase() ?? "X"}
