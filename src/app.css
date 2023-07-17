@@ -5,6 +5,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+}
+
 ::-webkit-scrollbar {
   @apply w-2
 }
@@ -20,6 +32,7 @@
 .tagList::-webkit-scrollbar {
   @apply h-2
 }
+
 
 * {
   scroll-behavior: smooth;

@@ -4,11 +4,15 @@
 
     export let data;
 
-    const { messages, users } = data
+    const { messages, users, commits } = data;
+
     let newChatModal = false;
     let logOutModal = false;
     let newChatUserSuggest;
     let conversationsUsers;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
     function searchUser(value){
         try {
@@ -42,8 +46,8 @@
     $pageMetaData.headerText = "Dashboard";
 </script>
 
-<div class="flex flex-col-reverse sm:flex-row justify-start items-start">
-    <aside class="flex flex-col gap-4 md:w-[500px] p-4 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:h-screen w-full">
+<div class="grid grid-cols-1 md:grid-cols-12 max-md:flex max-md:flex-col-reverse justify-start items-start">
+    <aside class="col-span-1 md:col-span-5 col-start-1 flex flex-col gap-4 p-4 max-md:mt-10 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 md:h-screen w-full">
         <button class="button-primary button-lg" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
         <hr class="my-2">
         <div class="relative w-full text-gray-500 dark:text-gray-400">
@@ -66,11 +70,46 @@
     </aside>
 
     <!-- Action cards -->
-    <div class="p-4 grid grid-cols-1 gap-4 md:grid-cols-2 w-full max-w-screen-md">
-        <a href="/dashboard/settings" class="card-button" ><i class="bi bi-sliders"></i><span>Settings<p>Change some informations</p></span></a>
-        <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
+    <div class="flex flex-col gap-4 p-4 md:col-span-7 md:col-start-6 w-full">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
+            <a href="/dashboard/settings" class="card-button" ><i class="bi bi-sliders"></i><span>Settings<p>Change some informations</p></span></a>
+            <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
+        </div>
+        {#if commits}
+            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-6">
+                <h4 class="mb-4">Latest commits</h4>
+                <!-- svelte-ignore missing-declaration -->
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                <ol 
+                    class=" flex flex-row w-auto overflow-x-auto will-change-transform cursor-pointer no-scrollbar"
+                    on:mousedown={(e) => {let slider = e.target.closest("ol");isDown = true;slider.classList.add('cursor-grab');startX = e.pageX - slider.offsetLeft;scrollLeft = slider.scrollLeft;}} 
+                    on:mouseleave={(e) => {isDown = false;e.target.closest("ol").classList.remove('cursor-grab');}} 
+                    on:mouseup={(e) => {isDown = false;e.target.closest("ol").classList.remove('cursor-grab');}} 
+                    on:mousemove={(e) => {let slider = e.target.closest("ol");if(!isDown) return;e.preventDefault();const x = e.pageX - slider.offsetLeft;const walk = (x - startX) * 2; slider.scrollLeft = scrollLeft - walk;}}
+                >
+                    {#each commits as commit}
+                        <li class="relative mb-0 shrink-0 w-80">
+                            <div class="flex items-center">
+                                <div class="z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-white dark:bg-blue-900 ring-8 dark:ring-gray-900 shrink-0">
+                                    <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
+                            </div>
+                            <div class="mt-8 pr-8">
+                                <a href="{commit.html_url}" target="_blank" class="w-full text-lg font-semibold text-gray-900 dark:text-white line-clamp-1 text-ellipsis">{new URL(commit.commit.url).pathname.split("/").pop()}</a>
+                                <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{new Date(commit.commit.author.date).toLocaleString()}</time>
+                                <p class="text-base font-normal text-gray-500 dark:text-gray-400 line-clamp-3 text-ellipsis">{commit.commit.message}</p>
+                            </div>
+                        </li>
+                    {/each}
+                </ol>
+            </div>
+        {/if}
     </div>
 </div>
+
 
 
 <Modal bind:open={newChatModal} size="xs" autoclose>

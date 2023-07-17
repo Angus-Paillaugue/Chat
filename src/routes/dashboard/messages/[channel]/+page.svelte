@@ -11,6 +11,7 @@
     let textarea;
     let mentionUserContainer;
     let atMenuDisplay = false;
+    let fileInputFiles;
 
     let { messages, chattingWith, user, users } = data;
     const { channel } = $page.params;
@@ -47,12 +48,23 @@
     });
   
     async function sendMessage() {
-        const response = await fetch("/api/newMessage", { method:"POST", body:JSON.stringify({ newMessage, channel }) });
-        const data = await response.json();
-        if(data.success){
-            newMessage = '';
-            textarea.style.height = "42px";
+        const parseMentions = (text) => {
+            const regexExp = new RegExp(/\B@\w+/g)
+            return text.replace(regexExp, function(match) {
+                return `<user>${match}</user> `;
+            });
         }
+
+        let formData = new FormData();
+        formData.append("text", parseMentions(newMessage));
+        formData.append("from", user.id);
+        formData.append("to", channel);
+        if(fileInputFiles) formData.append("file", fileInputFiles[0]);
+        
+        await pb.collection('messages').create(formData);
+
+        newMessage = "";
+        fileInputFiles = "";
     }
 
     $pageMetaData.title = `Chatting with ${chattingWith.username}`,
@@ -114,8 +126,18 @@
                     <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
                         <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
                             <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.expand?.from.id}/{message.expand?.from.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
-                            <div class="relative {user.id == message.expand?.from?.id ? "mr-3 bg-primary-100" : "ml-3 bg-white"} text-sm py-2 px-4 shadow rounded-xl">
-                                <p class="leading-6 font-normal text-neutral-700">{@html message.text.replaceAll("\n", "<br />")}</p>
+                            <div class="flex flex-col">
+                                {#if message.file}
+                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="flex flex-row justify-start items-center">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
+                                        </svg>
+                                        {message.file.split(".").pop()}
+                                    </a>
+                                {/if}
+                                <div class="relative {user.id == message.expand?.from?.id ? "mr-3 bg-primary-100" : "ml-3 bg-white"} text-sm py-2 px-4 shadow rounded-xl">
+                                    <p class="leading-6 font-normal text-neutral-700">{@html message.text.replaceAll("\n", "<br />")}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,6 +162,13 @@
             {/if}
             <label for="chat" class="sr-only">Your message</label>
             <div class="flex items-center px-3 py-2 rounded-lg">
+                <label for="fileInput" class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
+                      </svg>
+                    <span class="sr-only">Upload image</span>
+                </label>
+                <input type="file" name="fileInput" id="fileInput" class="hidden" bind:files={fileInputFiles}>
                 <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 outline-none resize-none" placeholder="Your message..." bind:value={newMessage} bind:this={textarea} on:keyup={oninput}></textarea>
                 <!-- oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' -->
                     <button type="submit" class="inline-flex justify-center p-2 text-primary-600 rounded-full cursor-pointer hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-gray-600">

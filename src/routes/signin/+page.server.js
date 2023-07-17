@@ -12,12 +12,13 @@ export const actions = {
         if(username.includes(" ")) return { err:true, msg: "Username can not contain spaces." }
 
 		try {
-            const formData = new FormData()
-            formData.append("username", username)
-            formData.append("email", email)
-            formData.append("password", password)
-            formData.append("passwordConfirm", password)
-            formData.append("bio", "No bio for now")
+            const formData = new FormData();
+            formData.append("username", username);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("passwordConfirm", password);
+            formData.append("bio", "No bio for now");
+            formData.append("admin", false);
             let response = await fetch(`https://api.dicebear.com/6.x/avataaars-neutral/jpg?seed=${username}`);
             let blob = await response.blob();
             formData.append("avatar", new File([blob], `${username}-banner.jpeg`, {type: blob.type,}));

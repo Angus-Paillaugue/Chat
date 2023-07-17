@@ -59,7 +59,7 @@
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-stack text-4xl" />
                 <h4>Built with TailwindCSS</h4>
-                <p>This website has been built with state of the art tools like <a href="https://kit.svelte.dev/" class="link">SvelteKit</a>, <a href="https://tailwindcss.com/" class="link">TailwindCSS</a> ad even <a href="https://pocketbase.io/" class="link">PocketBase</a></p>
+                <p>This website has been built with state of the art tools like <a href="https://kit.svelte.dev/" target="_blank" class="link">SvelteKit</a>, <a href="https://tailwindcss.com/" target="_blank" class="link">TailwindCSS</a> ad even <a href="https://pocketbase.io/" target="_blank" class="link">PocketBase</a></p>
             </div>
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-gift-fill text-4xl" />
