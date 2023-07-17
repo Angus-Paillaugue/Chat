@@ -3,9 +3,11 @@
     import { Tooltip  } from 'flowbite-svelte';
 
     export let user;
+    let display;
+    $: display = user && !$page.url.pathname.startsWith("/dashboard/messages");
 </script>
 
-{#if user && !$page.url.pathname.startsWith("/dashboard/messages")}
+{#if display}
     <div class="fixed z-30 w-full h-16 max-w-lg -translate-x-1/2 bg-white bg-opacity-50 backdrop-blur border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
         <div class="grid h-full max-w-lg grid-cols-3 mx-auto">
             <a href="/" class="inline-flex flex-col items-center justify-center rounded-l-full px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">

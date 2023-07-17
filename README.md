@@ -2,6 +2,7 @@
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
+
 ## Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
@@ -14,6 +15,7 @@ npm create svelte@latest
 npm create svelte@latest my-app
 ```
 
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
@@ -24,6 +26,7 @@ npm run dev
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
+
 
 ## Building
 
@@ -40,9 +43,9 @@ You can preview the production build with `npm run preview`.
 
 # TODO:
 
- - [-] Fix "Sign-out" button on Dashboard
+ - [x] Fix "Sign-out" button on Dashboard
  - [x] Be able to mention users in messages
- - [-] Be able to include images in messages
+ - [x] Be able to include files in messages
  - [-] Be able to react to messages
  - [-] Be able to delete own messages
  - [-] Put $pageMetaData in all the website pages

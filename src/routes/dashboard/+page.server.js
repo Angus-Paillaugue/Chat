@@ -40,6 +40,7 @@ export async function load({ locals }) {
             repo: 'Chat'
         });
 
+
         return { users, messages, commits:commits.data }
     }
 

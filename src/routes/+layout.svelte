@@ -7,11 +7,14 @@
 
     export let data;
     
-    const { user } = data;
+    let user;
+    $: user = data.user;
     let backButton = false;
+    let cookieModal = false;
 
     onMount(() => {
         if((history && history?.length) > 1) backButton = true;
+        if(!localStorage.getItem("acceptsCookies")) cookieModal = true;
     });
 </script>
 
@@ -38,3 +41,21 @@
     <slot />
     <Navbar user={user}/>
 </main>
+
+{#if cookieModal}
+    <div class="fixed top-0 left-0 w-full h-full z-50 bg-neutral-800 bg-opacity-50 flex flex-col justify-end items-start p-6">
+        <div class="p-6 flex bg-white rounded-lg flex-col space-y-4 max-w-sm">
+            <img src="https://www.svgrepo.com/show/30963/cookie.svg" class="w-1/3 mx-auto" alt="">
+            <p>We use cookies to provide a better user experience.</p>
+            <div class="flex flex-row justify-between items-center">
+                <a href="/privacy-policy" class="link text-sm">Privacy Policy</a>
+                <button class="button-primary"
+                    on:click={() => {
+                        localStorage.setItem("acceptsCookies", true);
+                        cookieModal = false;
+                    }}
+                >Accept</button>
+            </div>
+        </div>
+    </div>
+{/if}
