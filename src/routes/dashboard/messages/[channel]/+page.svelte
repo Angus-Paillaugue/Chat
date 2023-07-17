@@ -28,7 +28,8 @@
                 // Fetch associated user
                 const from = await pb.collection('users').getOne(record.from);
                 record.expand = { from };
-                record.text = parseMentions(record.text)
+                record.text = parseMentions(record.text);
+                await pb.collection("messages").update(record.id, { seen:true });
                 messages = [...messages, record];
             }
             if (action === 'delete') {
@@ -68,7 +69,7 @@
     }
 
     $pageMetaData.title = `Chatting with ${chattingWith.username}`,
-    $pageMetaData.description = "";
+    $pageMetaData.description = `You are now chatting with ${user.username}`;
     $pageMetaData.headerText = `<a href="/u/${chattingWith.username}" class="p-2 flex flex-row justify-start items-center gap-4 w-fit"><img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/${chattingWith.id}/${chattingWith.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/><div class="flex flex-col"><h6>${ chattingWith.username }</h6></div></a>`;
 
     function oninput(){
@@ -123,12 +124,12 @@
         <div>
             <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto">
                 {#each messages as message (message.id)}
-                    <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
-                        <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
+                <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
+                    <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
                             <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.expand?.from.id}/{message.expand?.from.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                             <div class="flex flex-col">
                                 {#if message.file}
-                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="flex flex-row justify-start items-center">
+                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                                         </svg>

@@ -56,14 +56,23 @@
             </div>
             <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search conversations users..." autocomplete="off" on:keyup={(e) => {searchConversation(e.target.value)}}>
         </div>
-        <div class="flex flex-col gap-4 h-full overflow-auto" bind:this={conversationsUsers}>
+        <div class="flex flex-col gap-4 h-full" bind:this={conversationsUsers}>
             {#each messages as message (message.id)}
-                <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-50 rounded-xl transition-all" data-username="{message.user.username}">
+                <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 {message.seen ? "bg-white hover:bg-gray-50" : "bg-gray-100 hover:bg-gray-200"} rounded-xl transition-all relative" data-username="{message.user.username}">
                     <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.user.id}/{message.user.avatar}?thumb=100x100" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                     <div class="flex flex-col">
                         <h6>{ message.user.username }</h6>
-                        <p class="line-clamp-1 text-ellipsis">{message.text}</p>
+                        <p class="line-clamp-1 text-ellipsis">
+                            {#if message.seen}
+                                {message.text}
+                            {:else}
+                                <b>{message.text}</b>
+                            {/if}
+                        </p>
                     </div>
+                    {#if !message.seen}
+                        <div class="bg-primary-400 w-4 h-4 rounded-full dark:bg-primary-900 absolute top-0 right-0 translate-x-1/3 -translate-y-1/3"></div>
+                    {/if}
                 </a>
             {/each}
         </div>

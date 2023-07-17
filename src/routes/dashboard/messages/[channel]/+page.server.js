@@ -25,5 +25,9 @@ export const load = async({ locals, params }) => {
 
     let users = structuredClone(await pb.collection("users").getFullList());
 
+    for(const message of messages){
+        await pb.collection("messages").update(message.id, { seen:true });
+    }
+
     return { messages, chattingWith, pb:structuredClone(pb), users };
 };

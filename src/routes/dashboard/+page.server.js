@@ -4,7 +4,7 @@ export async function load({ locals }) {
     const { pb, user } = locals;
 
     const parseMentions = (text) => {
-        const regexExp = new RegExp(/(?=(<user>))(\w|\W)*(?<=<\/user>)/, "gm")
+        const regexExp = new RegExp(/(?=(<user>))(\w|\W)*(?<=<\/user>)/, "gm");
         return text.replace(regexExp, function(match) {
             return match.trim().slice(6, -7);
         });
@@ -18,7 +18,7 @@ export async function load({ locals }) {
 
     let ids = [];
     let messages = structuredClone(resultList).map(message => {
-        return { text:parseMentions(message.text), id:message.id, user:message.expand.from.id == user.id ? message.expand.to : message.expand.from }
+        return { text:parseMentions(message.text), id:message.id, user:message.expand.from.id == user.id ? message.expand.to : message.expand.from, seen:message.seen }
     });
     messages = messages.filter(message => {
         if(ids.includes(message.user.id)){
@@ -32,17 +32,16 @@ export async function load({ locals }) {
     let users = structuredClone(await pb.collection("users").getFullList());
     users = users.filter(u => u.id !== user.id);
 
-    if(user.admin){
-        const octokit = new Octokit({auth: process.env.GITHUB_ACCESS_TOKEN});
-              
-        let commits = await octokit.request('GET /repos/{owner}/{repo}/commits', {
-            owner: 'Angus-Paillaugue',
-            repo: 'Chat'
-        });
+    // if(user.admin){
+    //     const octokit = new Octokit({auth: process.env.GITHUB_ACCESS_TOKEN});
 
+    //     let commits = await octokit.request('GET /repos/{owner}/{repo}/commits', {
+    //         owner: 'Angus-Paillaugue',
+    //         repo: 'Chat'
+    //     });
 
-        return { users, messages, commits:commits.data }
-    }
+    //     return { users, messages, commits:commits.data }
+    // }
 
     return { users, messages }
 }

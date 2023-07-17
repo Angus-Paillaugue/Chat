@@ -12,10 +12,10 @@
 
 <section id="hero-area" class="bg-primary-100 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
     <div class="flex flex-col justify-center">
-        <h2 class="text-4xl font-bold leading-snug text-gray-700 mb-10">
-            Startup and SaaS Landing Page
-            <br /> Built with TailwindCSS
-        </h2>
+        <h2 class="text-4xl font-bold leading-snug text-gray-700 mb-4">Realtime chat app</h2>
+        <p class="mb-10">
+            With <b>ChitChat</b> you can send direct messages to any users at any time.
+        </p>
         <a href="/signin" class="button-primary w-fit mx-auto mb-10">Sign up now</a>
     </div>
     <img class="mx-auto" src="/hero.svg" alt="" />
