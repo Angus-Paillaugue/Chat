@@ -47,6 +47,6 @@ You can preview the production build with `npm run preview`.
  - [x] Be able to mention users in messages
  - [x] Be able to include files in messages
  - [x] Be able to tell if a message has been seen
- - [-] Be able to react to messages
- - [-] Be able to delete own messages
- - [-] Put $pageMetaData in all the website pages
+ - [ ] Be able to react to messages
+ - [ ] Be able to delete own messages
+ - [ ] Put $pageMetaData in all the website pages
