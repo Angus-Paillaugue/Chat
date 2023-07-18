@@ -47,7 +47,7 @@
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-12 max-md:flex max-md:flex-col-reverse justify-start items-start">
-    <aside class="col-span-1 md:col-span-5 col-start-1 flex flex-col gap-4 p-4 max-md:mt-10 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 md:h-screen w-full">
+    <aside class="col-span-1 md:col-span-5 col-start-1 flex flex-col gap-4 p-4 max-md:mt-10 bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-600 md:h-screen w-full">
         <button class="button-primary button-lg" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
         <hr class="my-2">
         <div class="relative w-full text-gray-500 dark:text-gray-400">
@@ -58,7 +58,7 @@
         </div>
         <div class="flex flex-col gap-4 h-full" bind:this={conversationsUsers}>
             {#each messages as message (message.id)}
-                <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 {message.seen ? "bg-white hover:bg-gray-50" : "bg-gray-100 hover:bg-gray-200"} rounded-xl transition-all relative" data-username="{message.user.username}">
+                <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 {message.seen ? "bg-white hover:bg-gray-50 dark:bg-gray-700 hover:dark:bg-gray-600" : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-500"} rounded-xl transition-all relative" data-username="{message.user.username}">
                     <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.user.id}/{message.user.avatar}?thumb=100x100" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                     <div class="flex flex-col">
                         <h6>{ message.user.username }</h6>
@@ -85,7 +85,7 @@
             <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
         </div>
         {#if commits}
-            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-6">
+            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-600 p-6">
                 <h4 class="mb-4">Latest commits</h4>
                 <!-- svelte-ignore missing-declaration -->
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->

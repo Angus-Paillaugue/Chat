@@ -2,8 +2,10 @@
     import "../app.css";
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
-    import { pageMetaData } from "$lib/stores"
+    import { pageMetaData, preferences } from "$lib/stores"
     import Navbar from "$lib/components/Navbar.svelte";
+    import { browser } from '$app/environment';
+
 
     export let data;
     
@@ -11,6 +13,17 @@
     $: user = data.user;
     let backButton = false;
     let cookieModal = false;
+
+    if (browser) {
+        preferences.subscribe((data) => {
+            const { theme } = data;
+            if(theme == "dark"){
+                document.documentElement.classList.add('dark');
+            }else{
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    }
 
     onMount(() => {
         if((history && history?.length) > 1) backButton = true;

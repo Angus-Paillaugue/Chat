@@ -30,7 +30,6 @@ export const actions = {
             await pb.collection('users').authWithPassword(username, password);
             throw redirect(303, "dashboard");
         } catch (_) {
-            console.log(_);
             return { err:true, msg:"Username or e-mail already taken." }
         }
 	}

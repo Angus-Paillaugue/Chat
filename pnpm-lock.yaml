@@ -38,6 +38,9 @@ dependencies:
   sharp:
     specifier: ^0.30.4
     version: 0.30.7
+  svelte-local-storage-store:
+    specifier: ^0.5.0
+    version: 0.5.0(svelte@4.0.5)
   swiper:
     specifier: ^10.0.4
     version: 10.0.4
@@ -2135,6 +2138,15 @@ packages:
     dependencies:
       svelte: 4.0.5
     dev: true
+
+  /svelte-local-storage-store@0.5.0(svelte@4.0.5):
+    resolution: {integrity: sha512-SEDrpapeia6fUqta+r1NvSLlJYPkZ4pBcl15EYIOSPNzy6vhpoXu8cnzUDmZxsWl7fZGAHxrVH9UyZCbyO4W+g==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || ^4.0.0
+    dependencies:
+      svelte: 4.0.5
+    dev: false
 
   /svelte@4.0.5:
     resolution: {integrity: sha512-PHKPWP1wiWHBtsE57nCb8xiWB3Ht7/3Kvi3jac0XIxUM2rep8alO7YoAtgWeGD7++tFy46krilOrPW0mG3Dx+A==}

@@ -12,7 +12,6 @@ export const actions = {
 			const res = await locals.pb.collection('users').authWithPassword(username, password);
 			throw redirect(303, '/dashboard');
 		} catch (_) {
-			console.log(_);
 			return { err:true }
 		}
 

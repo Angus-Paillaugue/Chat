@@ -10,9 +10,9 @@
     $pageMetaData.headerText = "Home";
 </script>
 
-<section id="hero-area" class="bg-primary-100 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
+<section id="hero-area" class="bg-primary-100 dark:bg-primary-700/30 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
     <div class="flex flex-col justify-center">
-        <h2 class="text-4xl font-bold leading-snug text-gray-700 mb-4">Realtime chat app</h2>
+        <h2 class="font-bold leading-snug text-gray-700 dark:text-neutral-100 mb-4">Realtime chat app</h2>
         <p class="mb-10">
             With <b>ChitChat</b> you can send direct messages to any users at any time.
         </p>
@@ -26,25 +26,25 @@
     
     <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 px-6 gap-2">
         
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
+        <div class="p-8 bg-white dark:bg-gray-800 rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
             <i class="bi bi-lock-fill text-5xl text-primary-500" />
             <h3>Security</h3>
             <p>At our core, we prioritize your security. We employ state-of-the-art encryption protocols and robust security measures to ensure your data remains safe and protected, allowing you to chat with confidence.</p>
         </div>
 
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
+        <div class="p-8 bg-white dark:bg-gray-800 rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
             <i class="bi bi-bell-slash-fill text-5xl text-primary-500" />
             <h3>Privacy</h3>
             <p>Your privacy matters to us. We are committed to maintaining strict confidentiality and never sharing your personal information with third parties. Rest assured that your conversations and content are kept private, giving you complete control over your digital footprint.</p>
         </div>
 
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
+        <div class="p-8 bg-white dark:bg-gray-800 rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
             <i class="bi bi-cash-coin text-5xl text-primary-500" />
             <h3>Pricing</h3>
             <p>To use our app, you d'ont have to spend a dime! Our app doesn't include <b>any</b> kind of purchases !</p>
         </div>
 
-        <div class="p-8 bg-white rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
+        <div class="p-8 bg-white dark:bg-gray-800 rounded-lg h-fit shadow-sm transition-shadow duration-75 hover:shadow-md cursor-pointer">
             <i class="bi bi-cash-coin text-5xl text-primary-500" />
             <h3>Community</h3>
             <p>At this moment, <b>{numberOfUsers}</b> {numberOfUsers > 1 ? "users" : "user"} have joined the app. Now is your turn. <a href="/signin" class="link">Sign-up here</a></p>
@@ -52,10 +52,10 @@
     </div>
 </section>
 
-<section id="feature" class="bg-primary-100 py-24">
+<section id="feature" class="bg-primary-100 dark:bg-primary-700/30 py-24">
     <h2 class="mb-24 w-fit mx-auto">Learn More About Us</h2>
     <div class="grid grid-cols-1 xl:grid-cols-2 px-6 gap-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 text-text-main dark:text-white">
             <div class="w-full p-4 flex flex-col gap-2">
                 <i class="bi bi-stack text-4xl" />
                 <h4>Built with TailwindCSS</h4>

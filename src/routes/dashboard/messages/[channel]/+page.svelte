@@ -124,7 +124,8 @@
         <div>
             <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto">
                 {#each messages as message (message.id)}
-                    <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg" on:contextmenu={(e) => {console.log(e);}}>
                         <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
                             {#if message.expand?.from?.id !== user.id}
                                 <a href="/u/{message.expand?.from?.username}">
@@ -135,14 +136,14 @@
                             {/if}
                             <div class="flex flex-col">
                                 {#if message.file}
-                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center text-gray-800">
+                                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                                         </svg>
                                         {message.file.split(".").pop()}
                                     </a>
                                 {/if}
-                                <div class="relative {user.id == message.expand?.from?.id ? "mr-3 bg-primary-100" : "ml-3 bg-white"} text-sm py-2 px-4 shadow rounded-xl">
+                                <div class="relative {user.id == message.expand?.from?.id ? "mr-3 bg-primary-100 dark:bg-primary-600/50" : "ml-3 bg-white dark:bg-gray-600"} text-sm py-2 px-4 shadow rounded-xl">
                                     <p class="leading-6 font-normal text-neutral-700">{@html message.text.replaceAll("\n", "<br />")}</p>
                                 </div>
                             </div>
@@ -157,7 +158,7 @@
                 <div class="w-full p-4">
                     <div class="flex flex-row flex-wrap gap-4" bind:this={mentionUserContainer}>
                         {#each users as user}
-                            <button class="p-2 flex flex-row justify-start gap-4 hover:bg-white border border-gray-300 text-gray-900 w-fit rounded-xl transition-all" data-username="{user.username}" on:click={() => {identifyUser(user.username)}}>
+                            <button class="p-2 flex flex-row justify-start gap-4 hover:bg-white bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-800 border dark:border-gray-600 border-gray-200 text-gray-900 w-fit rounded-xl transition-all" data-username="{user.username}" on:click={() => {identifyUser(user.username)}}>
                                 <div class="p-2 flex flex-row justify-start items-center gap-4 w-fit">
                                     <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{user.id}/{user.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                                     <div class="flex flex-col"><h6>{ user.username }</h6></div>
@@ -168,17 +169,17 @@
                 </div>
             {/if}
             <label for="chat" class="sr-only">Your message</label>
-            <div class="flex items-center px-3 py-2 rounded-lg">
+            <div class="flex flex-row items-center px-3 py-2 rounded-lg gap-4">
                 <label for="fileInput" class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
                         <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                       </svg>
                     <span class="sr-only">Upload image</span>
+                    <input type="file" name="fileInput" id="fileInput" class="hidden" bind:files={fileInputFiles}>
                 </label>
-                <input type="file" name="fileInput" id="fileInput" class="hidden" bind:files={fileInputFiles}>
-                <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 outline-none resize-none" placeholder="Your message..." bind:value={newMessage} bind:this={textarea} on:keyup={oninput}></textarea>
+                <textarea id="chat" rows="1" class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-200 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 outline-none resize-none" placeholder="Your message..." bind:value={newMessage} bind:this={textarea} on:keyup={oninput}></textarea>
                 <!-- oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' -->
-                    <button type="submit" class="inline-flex justify-center p-2 text-primary-600 rounded-full cursor-pointer hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-gray-600">
+                <button type="submit" class="inline-flex justify-center p-2 text-primary-600 rounded-full cursor-pointer hover:bg-primary-100 dark:text-primary-600/90 dark:hover:bg-gray-600">
                     <svg class="w-5 h-5 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
                     </svg>
