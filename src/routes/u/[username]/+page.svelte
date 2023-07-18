@@ -1,5 +1,6 @@
 <script>
     import { pageMetaData } from "$lib/stores"
+    import { Tooltip } from"flowbite-svelte"
 
     export let data;
 
@@ -19,6 +20,12 @@
 <div class="lg:h-[108px] h-[70px] mb-2 flex justify-between items-center lg:p-4 p-2 dark:text-white text-neutral-900 lg:pl-44 pl-32">
     <div class="h-full flex items-start">
         <h1 class="lg:text-4xl text-2xl">{watchingUser.username}</h1>
+    </div>
+    <div>
+        <a href="/dashboard/messages/{watchingUser.id}" class="button-border-gray">
+            <i class="bi bi-send"></i>
+        </a>
+        <Tooltip>Send a message<br />to <b>{watchingUser.username}</b></Tooltip>
     </div>
 </div>
 <div class="pl-5">

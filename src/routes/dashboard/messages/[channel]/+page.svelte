@@ -124,9 +124,15 @@
         <div>
             <div class="grid grid-cols-12 gap-y-2 p-4 overflow-y-auto">
                 {#each messages as message (message.id)}
-                <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
-                    <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
-                            <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.expand?.from.id}/{message.expand?.from.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
+                    <div class="{user.id == message.expand?.from?.id ? "col-start-5 col-end-13" : "col-start-1 col-end-9"} p-3 rounded-lg">
+                        <div class="flex {user.id == message.expand?.from?.id ? "flex-row-reverse" : "flex-row"} items-end">
+                            {#if message.expand?.from?.id !== user.id}
+                                <a href="/u/{message.expand?.from?.username}">
+                                    <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.expand?.from.id}/{message.expand?.from.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
+                                </a>
+                            {:else}
+                                <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.expand?.from.id}/{message.expand?.from.avatar}?thumb=32x32" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
+                            {/if}
                             <div class="flex flex-col">
                                 {#if message.file}
                                     <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center">
