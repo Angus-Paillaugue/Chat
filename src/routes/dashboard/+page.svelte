@@ -135,7 +135,7 @@
         </div>
         <div class=" w-full bg-gray-100 mb-4 rounded-lg overflow-hidden" bind:this={newChatUserSuggest}>
             {#each users as user (user.id)}
-                <a href="/dashboard/messages/{user.id}" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-200 transition-all" data-username="{user.username}">
+                <a href="/dashboard/messages/{user.id}" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 transition-all" data-username="{user.username}">
                     <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-500 flex-shrink-0">
                         { user.username.split("")[0].toUpperCase() ?? "X" }
                     </div>
