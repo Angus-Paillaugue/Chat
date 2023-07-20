@@ -10,9 +10,11 @@
     export let data;
     
     let user;
-    $: user = data.user;
+    let recentMessages;
     let backButton = false;
     let cookieModal = false;
+    $: user = data.user;
+    $: recentMessages = data.recentMessages;
 
     if (browser) {
         preferences.subscribe((data) => {
@@ -52,7 +54,7 @@
         {/if}
     </nav>
     <slot />
-    <Navbar user={user}/>
+    <Navbar user={user} recentMessages={recentMessages}/>
 </main>
 
 {#if cookieModal}

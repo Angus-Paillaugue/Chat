@@ -11,8 +11,7 @@
     let theme = $preferences.theme
 
     function switchTheme() {
-        console.log(theme);
-        preferences.set({ theme: theme})
+        preferences.set({ theme: theme});
 
         theme == "dark" ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark');
     }
@@ -39,7 +38,7 @@
                     </div>
                     <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username
-                            <i class="bi bi-info-circle ml-1"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
                             <Tooltip class="text-center">You can <b>not</b> change your username<br>You should have thought twice</Tooltip>
                         </label>
                         <input type="text" placeholder="Username" name="username" readonly value="{user.username}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -66,7 +65,10 @@
             <TabItem class="w-full p-0">
                 <span slot="title">Danger</span>
                 <div class="flex flex-col gap-6">
-                    <button class="button-red w-full" type="button" on:click={() => {deleteAccountModal = !deleteAccountModal}}>Delete account <i class="bi bi-exclamation-triangle"></i></button>
+                    <button class="button-red w-full" type="button" on:click={() => {deleteAccountModal = !deleteAccountModal}}>
+                        Delete account 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                    </button>
                 </div>
             </TabItem>
         </Tabs>

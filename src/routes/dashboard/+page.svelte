@@ -4,7 +4,7 @@
 
     export let data;
 
-    const { messages, users, commits } = data;
+    const { recentMessages, users, commits } = data;
 
     let newChatModal = false;
     let logOutModal = false;
@@ -48,16 +48,21 @@
 
 <div class="grid grid-cols-1 md:grid-cols-12 max-md:flex max-md:flex-col-reverse justify-start items-start">
     <aside class="col-span-1 md:col-span-5 col-start-1 flex flex-col gap-4 p-4 max-md:mt-10 bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-600 md:h-screen w-full">
-        <button class="button-primary button-lg" on:click={() =>newChatModal = true}>New chat<i class="bi bi-plus-lg"></i></button>
+        <button class="button-primary button-lg" on:click={() =>newChatModal = true}>
+            New chat
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+        </button>
         <hr class="my-2">
         <div class="relative w-full text-gray-500 dark:text-gray-400">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <i class="bi bi-person-circle"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>                  
             </div>
             <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search conversations users..." autocomplete="off" on:keyup={(e) => {searchConversation(e.target.value)}}>
         </div>
         <div class="flex flex-col gap-4 h-full" bind:this={conversationsUsers}>
-            {#each messages as message (message.id)}
+            {#each recentMessages as message (message.id)}
                 <a href="/dashboard/messages/{ message.user.id }" class="p-2 flex flex-row justify-start gap-4 {message.seen ? "bg-white hover:bg-gray-50 dark:bg-gray-700 hover:dark:bg-gray-600" : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-500"} rounded-xl transition-all relative" data-username="{message.user.username}">
                     <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{message.user.id}/{message.user.avatar}?thumb=100x100" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                     <div class="flex flex-col">
@@ -81,8 +86,18 @@
     <!-- Action cards -->
     <div class="flex flex-col gap-4 p-4 md:col-span-7 md:col-start-6 w-full">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
-            <a href="/dashboard/settings" class="card-button" ><i class="bi bi-sliders"></i><span>Settings<p>Change some informations</p></span></a>
-            <button  class="card-button" on:click={() => {logOutModal  =true;}}><i class="bi bi-door-closed"></i><span>Sign out<p>Disconnect from this account</p></span></button>
+            <a href="/dashboard/settings" class="card-button" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                </svg>
+                <span>Settings<p>Change some informations</p></span>
+            </a>
+            <button  class="card-button" on:click={() => {logOutModal  =true;}}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                </svg>
+                <span>Sign out<p>Disconnect from this account</p></span>
+            </button>
         </div>
         {#if commits}
             <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-600 p-6">
@@ -128,7 +143,9 @@
             <label for="simple-search" class="sr-only">Username</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <i class="bi bi-person-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>                      
                 </div>
                 <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search username..." autocomplete="off" on:keyup={(e) => {searchUser(e.target.value)}}>
             </div>
