@@ -136,7 +136,7 @@
                             {/if}
                             <div class="flex flex-col">
                                 {#if message.file}
-                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center text-gray-800">
+                                    <a href="http://127.0.0.1:8090/api/files/w1wt3dslr3zd4tt/{message.id}/{message.file}" download class="{user.id == message.expand?.from?.id ? "mr-3" : "ml-3"} flex flex-row justify-start items-center text-gray-800" target="_blank">
                                         <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                                         </svg>

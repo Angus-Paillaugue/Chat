@@ -9,7 +9,7 @@ export async function load({ locals }) {
             });
         }
     
-        const resultList = await pb.collection('messages').getFullList({
+        const resultList = await pb.autoCancellation(false).collection('messages').getFullList({
             sort: '-created',
             filter:`to="${user.id}" || from="${user.id}"`,
             expand: 'to,from',
