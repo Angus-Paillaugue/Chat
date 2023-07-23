@@ -10,7 +10,7 @@
     $pageMetaData.headerText = "Home";
 </script>
 
-<section id="hero-area" class="bg-primary-100 dark:bg-primary-700/30 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
+<section class="bg-primary-100 dark:bg-primary-700/30 p-6 justify-between w-full grid grid-cols-1 xl:grid-cols-2 text-center min-h-screen items-center">
     <div class="flex flex-col justify-center">
         <h2 class="font-bold leading-snug text-gray-700 dark:text-neutral-100 mb-4">Realtime chat app</h2>
         <p class="mb-10">

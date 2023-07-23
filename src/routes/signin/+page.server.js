@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 
 export async function load({ locals }) {
-	if(locals.user) throw redirect(303, "/dashboard")
+	if(locals.user) throw redirect(303, "/dashboard");
 }
 
 export const actions = {
@@ -28,7 +28,7 @@ export const actions = {
 
             await pb.collection("users").create(formData);
             await pb.collection('users').authWithPassword(username, password);
-            throw redirect(303, "dashboard");
+            throw redirect(303, "/dashboard");
         } catch (_) {
             return { err:true, msg:"Username or e-mail already taken." }
         }
