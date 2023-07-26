@@ -114,8 +114,8 @@
                     {#each commits as commit}
                         <li class="relative mb-0 shrink-0 w-80">
                             <div class="flex items-center">
-                                <div class="z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-white dark:bg-blue-900 ring-8 dark:ring-gray-900 shrink-0">
-                                    <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <div class="z-10 flex items-center justify-center w-6 h-6 bg-primary-100 rounded-full ring-white dark:bg-primary-900 ring-8 dark:ring-gray-900 shrink-0">
+                                    <svg class="w-2.5 h-2.5 text-primary-800 dark:text-primary-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                     </svg>
                                 </div>
@@ -153,9 +153,7 @@
         <div class=" w-full bg-gray-100 mb-4 rounded-lg overflow-hidden" bind:this={newChatUserSuggest}>
             {#each users as user (user.id)}
                 <a href="/dashboard/messages/{user.id}" class="p-2 flex flex-row justify-start gap-4 hover:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 transition-all" data-username="{user.username}">
-                    <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-500 flex-shrink-0">
-                        { user.username.split("")[0].toUpperCase() ?? "X" }
-                    </div>
+                    <img src="http://127.0.0.1:8090/api/files/_pb_users_auth_/{user.id}/{user.avatar}?thumb=100x100" alt="Avatar" class="h-8 w-8 rounded-full flex-shrink-0"/>
                     <div class="flex flex-col">
                         <h6>{ user.username }</h6>
                     </div>

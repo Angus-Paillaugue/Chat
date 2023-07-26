@@ -90,7 +90,7 @@ p, pre {
 }
 
 .card-button {
-  @apply rounded-lg md:p-10 p-6 w-full flex flex-col justify-start items-start gap-6 bg-white cursor-pointer disabled:cursor-not-allowed text-xl text-start hover:shadow-lg hover:-translate-y-1 transition-all dark:shadow-gray-700 border dark:border-gray-600 border-gray-200 dark:bg-gray-800 text-white
+  @apply rounded-lg md:p-10 p-6 w-full flex flex-col justify-start items-start gap-6 bg-white cursor-pointer disabled:cursor-not-allowed text-xl text-start hover:shadow-lg hover:-translate-y-1 transition-all dark:shadow-gray-700 border dark:border-gray-600 border-gray-200 dark:bg-gray-800 text-gray-500 dark:text-white stroke-gray-500 dark:stroke-white
 }
 .card-button p {
   @apply leading-5 mt-2
